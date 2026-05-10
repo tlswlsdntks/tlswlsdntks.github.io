@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>신진우 | Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <header class="nav">
+    <a href="#hero" class="nav-logo">JW.</a>
+    <nav class="nav-menu">
+      <a href="#about"          data-i18n="nav.about">소개</a>
+      <a href="#skills"         data-i18n="nav.skills">기술</a>
+      <a href="#experience"     data-i18n="nav.experience">경력</a>
+      <a href="#certifications" data-i18n="nav.certs">자격증</a>
+      <a href="#contact"        data-i18n="nav.contact">연락</a>
+    </nav>
+    <button class="lang-toggle" id="langBtn" aria-label="언어 전환">EN</button>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section id="hero" class="hero">
+    <div class="hero-text">
+      <p class="hero-hi" data-i18n="hero.hi">안녕하세요,</p>
+      <h1 class="hero-name" data-i18n="hero.name">신진우</h1>
+      <p class="hero-role" data-i18n="hero.role">백엔드 개발자 · 총 3년 10개월</p>
+      <blockquote class="hero-quote">
+        "<span data-i18n="hero.quote">버그를 두려워하지 않는 개발자, 오히려 버그에서 배웁니다.</span>"
+      </blockquote>
+      <p class="hero-desc" data-i18n="hero.desc">
+        Java · Spring 기반 백엔드 개발을 중심으로 REST API 설계부터 운영 자동화까지.<br>
+        문제를 회피하는 대신 원인을 파고드는 습관으로 팀의 신뢰를 쌓아왔습니다.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-fill" data-i18n="hero.cta">연락하기</a>
+        <a href="mailto:tlswlsdnehd@gmail.com" class="btn btn-ghost">tlswlsdnehd@gmail.com</a>
+      </div>
+    </div>
+    <div class="hero-avatar" aria-hidden="true">👨‍💻</div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section id="about" class="section bg-alt">
+    <div class="container">
+      <h2 class="section-heading" data-i18n="about.title">자기소개</h2>
+      <div class="about-body">
+        <p data-i18n="about.p1">
+          3년 전, 첫 배포에서 서버가 다운됐을 때 저는 그저 당황하는 초보였습니다.
+          하지만 그 순간부터 문제를 회피하는 대신 원인을 파고드는 습관을 들였습니다.
+          덕분에 지금은 장애 로그를 보면 머릿속에서 원인과 해결책이 동시에 그려집니다.
+        </p>
+        <p data-i18n="about.p2">
+          Java, Spring 기반으로 REST API 설계부터 운영 자동화까지 경험했고,
+          배포 후 발생한 수십 건의 장애를 원인 분석과 재발 방지 대책까지 책임졌습니다.
+          특히 API 응답 속도를 40% 단축한 프로젝트는 제게 "믿고 맡길 수 있는 개발자"라는 평판을 가져다주었습니다.
+        </p>
+        <p data-i18n="about.p3">
+          강의와 깃허브 기록, 코드 리뷰 피드백을 통해 실력을 키우며,
+          '안 되는 이유'보다 '되게 하는 방법'을 먼저 찾습니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-heading" data-i18n="skills.title">기술 스택</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3 class="skill-cat">Backend</h3>
+          <ul class="tag-list">
+            <li>Java</li><li>Spring Boot</li><li>Spring</li>
+            <li>Node.js</li><li>Nest.js</li><li>Express.js</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3 class="skill-cat">Frontend</h3>
+          <ul class="tag-list">
+            <li>JavaScript</li><li>TypeScript</li><li>React</li>
+            <li>HTML</li><li>CSS</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3 class="skill-cat">Database</h3>
+          <ul class="tag-list">
+            <li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3 class="skill-cat">DevOps / Tools</h3>
+          <ul class="tag-list">
+            <li>Docker</li><li>AWS</li><li>Git</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EXPERIENCE ── -->
+  <section id="experience" class="section bg-alt">
+    <div class="container">
+      <h2 class="section-heading" data-i18n="exp.title">경력</h2>
+      <p class="section-sub" data-i18n="exp.total">총 3년 10개월</p>
+
+      <ol class="timeline" reversed>
+
+        <li class="timeline-item">
+          <div class="tl-period">2025.09 — <span data-i18n="exp.now">현재</span></div>
+          <div class="tl-body">
+            <h3 class="tl-company" data-i18n="exp.c1">주식회사 핑거포스트</h3>
+            <p class="tl-role" data-i18n="exp.r1">백엔드 개발자</p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.c1b1">Java / Spring Boot 기반 백엔드 시스템 개발 및 운영</li>
+              <li data-i18n="exp.c1b2">REST API 설계 및 운영 자동화</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="tl-period">2022.12 — 2025.01</div>
+          <div class="tl-body">
+            <h3 class="tl-company" data-i18n="exp.c2">디투이노베이션</h3>
+            <p class="tl-role" data-i18n="exp.r2">솔루션사업부 대리 · 백엔드 개발자 <span class="tl-duration" data-i18n="exp.d2">2년 2개월</span></p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.c2b1">솔루션 사업부 백엔드 개발 및 API 고도화</li>
+              <li data-i18n="exp.c2b2"><strong>API 응답 속도 40% 단축</strong> — 성능 개선과 기능 확장 병행</li>
+              <li data-i18n="exp.c2b3">배포 후 장애 원인 분석 및 재발 방지 대책 수립</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="timeline-item">
+          <div class="tl-period">2021.10 — 2022.11</div>
+          <div class="tl-body">
+            <h3 class="tl-company" data-i18n="exp.c3">맥스테드</h3>
+            <p class="tl-role" data-i18n="exp.r3">SI개발부 사원 · 백엔드 개발자 <span class="tl-duration" data-i18n="exp.d3">1년 2개월</span></p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.c3b1">SI 프로젝트 백엔드 개발 참여</li>
+              <li data-i18n="exp.c3b2">REST API 개발 및 DB 연동</li>
+            </ul>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── CERTIFICATIONS + EDUCATION ── -->
+  <section id="certifications" class="section">
+    <div class="container cert-edu-wrap">
+
+      <div>
+        <h2 class="section-heading" data-i18n="cert.title">자격증</h2>
+        <ul class="cert-list">
+          <li class="cert-item">
+            <span class="cert-date">2024.06</span>
+            <div>
+              <p class="cert-name" data-i18n="cert.c1">정보처리기사</p>
+              <p class="cert-org" data-i18n="cert.o1">한국산업인력공단</p>
+            </div>
+          </li>
+          <li class="cert-item">
+            <span class="cert-date">2021.10</span>
+            <div>
+              <p class="cert-name" data-i18n="cert.c2">SQL 개발자 (SQLD)</p>
+              <p class="cert-org" data-i18n="cert.o2">한국데이터산업진흥원</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="section-heading" data-i18n="edu.title">학력</h2>
+        <ul class="cert-list">
+          <li class="cert-item">
+            <span class="cert-date">2012 — 2020</span>
+            <div>
+              <p class="cert-name" data-i18n="edu.school">대진대학교</p>
+              <p class="cert-org" data-i18n="edu.major">토목공학과 · 졸업 · 학점 3.26 / 4.5</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="section bg-alt">
+    <div class="container contact-wrap">
+      <h2 class="section-heading" data-i18n="contact.title">연락하기</h2>
+      <p class="contact-desc" data-i18n="contact.desc">
+        새로운 기회나 협업 제안은 언제든지 환영합니다.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:tlswlsdnehd@gmail.com" class="btn btn-fill">tlswlsdnehd@gmail.com</a>
+        <a href="tel:010-3717-6834" class="btn btn-ghost">010-3717-6834</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p data-i18n="footer">© 2026 신진우. Built with HTML, CSS &amp; JS.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

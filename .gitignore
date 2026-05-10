@@ -1,0 +1,10 @@
+# Claude Code 설정 (개인)
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
