@@ -210,25 +210,24 @@ function initTerminal() {
 
 initTerminal();
 
-/* ── Hero canvas — network graph ────────────────────── */
+/* ── Hero canvas — dense network graph ──────────────── */
 function initHeroCanvas() {
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
-  const ctx      = canvas.getContext('2d');
-  const LINK     = 125;
-  const N_HUB    = 7;
-  const N_NODE   = 150;
+  const ctx    = canvas.getContext('2d');
+  const LINK   = 175;
+  const N_HUB  = 12;
+  const N_NODE = 280;
   let nodes = [], pulses = [], frame = 0;
 
   function mkNode(hub) {
     const w = canvas.width, h = canvas.height;
-    const inLower = Math.random() < 0.82;
     return {
-      x:   Math.random() * w,
-      y:   inLower ? h * 0.28 + Math.random() * h * 0.72 : Math.random() * h * 0.32,
-      vx:  (Math.random() - 0.5) * (hub ? 0.10 : 0.20),
-      vy:  (Math.random() - 0.5) * (hub ? 0.10 : 0.20),
-      r:   hub ? 3.2 + Math.random() * 1.8 : Math.random() * 1.3 + 0.5,
+      x:  Math.random() * w,
+      y:  Math.random() * h,
+      vx: (Math.random() - 0.5) * (hub ? 0.08 : 0.14),
+      vy: (Math.random() - 0.5) * (hub ? 0.08 : 0.14),
+      r:  hub ? 4.5 + Math.random() * 2 : Math.random() * 1.6 + 0.6,
       hub,
     };
   }
@@ -242,17 +241,16 @@ function initHeroCanvas() {
   }
 
   function spawnPulse() {
-    const useHub = Math.random() < 0.55;
-    const pool   = useHub ? nodes.filter(n => n.hub) : nodes;
+    const pool = Math.random() < 0.6 ? nodes.filter(n => n.hub) : nodes;
     const a = pool[Math.random() * pool.length | 0];
     const b = nodes[Math.random() * nodes.length | 0];
     if (a === b) return;
     const dx = a.x - b.x, dy = a.y - b.y;
-    if (dx * dx + dy * dy < (LINK * 1.6) ** 2)
+    if (dx * dx + dy * dy < (LINK * 1.4) ** 2)
       pulses.push({
         a, b, p: 0,
-        sp:    0.007 + Math.random() * 0.009,
-        color: Math.random() < 0.35 ? '74,222,128' : '231,197,154',
+        sp:    0.006 + Math.random() * 0.008,
+        color: Math.random() < 0.4 ? '74,222,128' : '231,197,154',
       });
   }
 
@@ -274,29 +272,27 @@ function initHeroCanvas() {
         const dx = a.x - b.x, dy = a.y - b.y;
         const d2 = dx * dx + dy * dy;
         if (d2 > LINK * LINK) continue;
-        const d      = Math.sqrt(d2);
-        const yf     = Math.max(a.y, b.y) / h;
-        const boost  = (a.hub || b.hub) ? 2.8 : 1;
-        const α      = Math.min((1 - d / LINK) * 0.18 * (0.08 + yf * 0.92) * boost, 0.4);
+        const d     = Math.sqrt(d2);
+        const boost = (a.hub || b.hub) ? 3.2 : 1;
+        const α     = Math.min((1 - d / LINK) * 0.2 * boost, 0.5);
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
         ctx.strokeStyle = `rgba(255,255,255,${α})`;
-        ctx.lineWidth   = a.hub || b.hub ? 0.9 : 0.45;
+        ctx.lineWidth   = a.hub || b.hub ? 1 : 0.5;
         ctx.stroke();
       }
     }
 
     /* nodes */
     nodes.forEach(n => {
-      const yf = n.y / h;
-      const α  = n.hub ? 0.75 : 0.04 + yf * 0.5;
+      const α = n.hub ? 0.9 : 0.28 + Math.random() * 0.06;
       if (n.hub) {
-        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 16);
-        g.addColorStop(0, `rgba(255,255,255,${α * 0.35})`);
+        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22);
+        g.addColorStop(0, `rgba(255,255,255,0.22)`);
         g.addColorStop(1, 'rgba(255,255,255,0)');
         ctx.beginPath();
-        ctx.arc(n.x, n.y, 16, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, 22, 0, Math.PI * 2);
         ctx.fillStyle = g;
         ctx.fill();
       }
@@ -310,23 +306,20 @@ function initHeroCanvas() {
     pulses = pulses.filter(p => {
       p.p += p.sp;
       if (p.p >= 1) return false;
-      const x  = p.a.x + (p.b.x - p.a.x) * p.p;
-      const y  = p.a.y + (p.b.y - p.a.y) * p.p;
-      const yf = y / h;
-      const ia = 0.18 + yf * 0.82;
-      const c  = p.color;
-      const g  = ctx.createRadialGradient(x, y, 0, x, y, 9);
-      g.addColorStop(0, `rgba(${c},${0.65 * ia})`);
+      const x = p.a.x + (p.b.x - p.a.x) * p.p;
+      const y = p.a.y + (p.b.y - p.a.y) * p.p;
+      const c = p.color;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 10);
+      g.addColorStop(0, `rgba(${c},0.7)`);
       g.addColorStop(1, `rgba(${c},0)`);
-      ctx.beginPath(); ctx.arc(x, y, 9, 0, Math.PI * 2);
+      ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2);
       ctx.fillStyle = g; ctx.fill();
-      ctx.beginPath(); ctx.arc(x, y, 2.2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${c},${ia})`; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${c},1)`; ctx.fill();
       return true;
     });
 
-    if (frame %  9 === 0) spawnPulse();
-    if (frame % 22 === 0) spawnPulse();
+    if (frame % 6 === 0) spawnPulse();
     requestAnimationFrame(draw);
   }
 
