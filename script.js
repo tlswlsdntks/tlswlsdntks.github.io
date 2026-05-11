@@ -210,6 +210,56 @@ function initTerminal() {
 
 initTerminal();
 
+/* ── Hero canvas dot-wave ───────────────────────────── */
+function initHeroCanvas() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const STEP = 22;
+  let t = 0;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+
+  function dotAlpha(x, y) {
+    const w = canvas.width, h = canvas.height;
+    const w1 = h * 0.68 + Math.sin(x / w * Math.PI * 2.4 + t)       * h * 0.13
+                         + Math.sin(x / w * Math.PI * 5.1 + t * 0.8) * h * 0.05;
+    const w2 = h * 0.80 + Math.sin(x / w * Math.PI * 3.2 - t * 1.2) * h * 0.10
+                         + Math.sin(x / w * Math.PI * 6.3 + t * 0.5) * h * 0.04;
+    const w3 = h * 0.58 + Math.sin(x / w * Math.PI * 4.0 + t * 0.9) * h * 0.09
+                         + Math.sin(x / w * Math.PI * 1.8 - t * 0.6) * h * 0.06;
+    const d1 = Math.max(0, 1 - Math.abs(y - w1) / (h * 0.17));
+    const d2 = Math.max(0, 1 - Math.abs(y - w2) / (h * 0.13));
+    const d3 = Math.max(0, 1 - Math.abs(y - w3) / (h * 0.11));
+    return Math.min(1, d1 * 0.9 + d2 * 0.8 + d3 * 0.7) * 0.28;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    t += 0.005;
+    for (let x = 0; x <= canvas.width; x += STEP) {
+      for (let y = 0; y <= canvas.height; y += STEP) {
+        const a = dotAlpha(x, y);
+        if (a < 0.018) continue;
+        ctx.beginPath();
+        ctx.arc(x, y, 1.3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${a})`;
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  draw();
+}
+
+initHeroCanvas();
+
 /* ── Custom cursor ───────────────────────────────────────── */
 const cursorEl = document.getElementById('cursor');
 if (cursorEl && window.matchMedia('(pointer: fine)').matches) {

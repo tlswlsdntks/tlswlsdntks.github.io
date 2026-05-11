@@ -4,7 +4,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink:      #0f0f12;
+  --ink:      #080808;
   --white:    #ffffff;
   --stone:    #999d9e;
   --graphite: #494a4d;
@@ -141,23 +141,21 @@ body.cursor-hover .cursor {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  overflow: hidden;
 }
 
-.hero::before {
-  content: '';
+.hero-canvas {
   position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px),
-    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-  background-size: auto, 56px 56px, 56px 56px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 100%;
   pointer-events: none;
   z-index: 0;
 }
 
-.hero > * { position: relative; z-index: 2; }
+.hero-top,
+.hero-body { position: relative; z-index: 2; }
 
 .hero-top {
   display: flex;
