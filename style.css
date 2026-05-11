@@ -4,12 +4,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ink:      #1c1d20;
+  --ink:      #0f0f12;
   --white:    #ffffff;
   --stone:    #999d9e;
   --graphite: #494a4d;
   --violet:   #455ce9;
   --violet-d: #334bd3;
+  --amber:    #e7c59a;
+  --neon:     #4ade80;
   --border:   rgba(255, 255, 255, 0.08);
 
   --font:        'Inter', 'Noto Sans KR', system-ui, sans-serif;
@@ -88,11 +90,9 @@ body.cursor-hover .cursor {
 }
 
 .nav-links {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   gap: 2px;
+  margin-right: 8px;
 }
 
 .nav-links a {
@@ -144,23 +144,35 @@ body.cursor-hover .cursor {
 
 .hero-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  gap: 32px;
   animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .hero-caption {
+  font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--stone);
+  color: var(--amber);
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
+}
+
+.hero-caption::before {
+  content: '>_ ';
+  color: var(--neon);
+  letter-spacing: 0;
 }
 
 .hero-since {
+  font-family: var(--font-mono);
   font-size: 12px;
   color: var(--stone);
   letter-spacing: 0.08em;
 }
+
+.hero-since::before { content: '[ '; color: var(--graphite); }
+.hero-since::after  { content: ' ]'; color: var(--graphite); }
 
 .hero-name {
   font-size: clamp(72px, 13.5vw, 200px);
@@ -204,20 +216,22 @@ body.cursor-hover .cursor {
    Terminal
 ══════════════════════════════════════ */
 .hero-terminal {
-  background: #0d0d0f;
+  background: #060609;
   border-radius: var(--radius-card);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 172, 92, 0.22);
+  box-shadow: 0 0 48px rgba(0, 172, 92, 0.06), inset 0 0 32px rgba(0, 0, 0, 0.4);
   min-height: 220px;
   align-self: flex-end;
 }
 
 .terminal-bar {
-  background: #2a2a2d;
+  background: #111116;
   padding: 10px 14px;
   display: flex;
   gap: 7px;
   align-items: center;
+  border-bottom: 1px solid rgba(0, 172, 92, 0.12);
 }
 
 .t-dot {
@@ -241,14 +255,14 @@ body.cursor-hover .cursor {
 
 .t-line { display: block; }
 
-.t-prompt { color: #7c6ff0; }
-.t-cmd    { color: #ffffff; }
-.t-out    { color: var(--stone); }
+.t-prompt { color: var(--amber); }
+.t-cmd    { color: #f3f3f3; }
+.t-out    { color: #5fcf85; }
 .t-cursor {
   display: inline-block;
   width: 8px;
   height: 14px;
-  background: var(--white);
+  background: var(--amber);
   vertical-align: text-bottom;
   animation: blink 1s step-end infinite;
 }
