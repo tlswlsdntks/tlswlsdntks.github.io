@@ -4,7 +4,7 @@ const i18n = {
   ko: {
     'nav.skills': '기술', 'nav.exp': '경력', 'nav.proj': '프로젝트', 'nav.certs': '자격증', 'nav.contact': '연락',
     'hero.caption': 'Developer',
-    'hero.tagline': '코드로 말합니다.',
+    'hero.tagline': '신뢰할 수 있는 동료가 되겠습니다.',
     'hero.status': '재직중 · 핑거포스트',
     'skills.title': '기술 스택',
     'proj.title': '프로젝트',
@@ -36,7 +36,7 @@ const i18n = {
   en: {
     'nav.skills': 'Skills', 'nav.exp': 'Experience', 'nav.proj': 'Projects', 'nav.certs': 'Certs', 'nav.contact': 'Contact',
     'hero.caption': 'Developer',
-    'hero.tagline': 'Code speaks louder.',
+    'hero.tagline': 'A developer you can count on.',
     'hero.status': 'Employed · Fingerpost',
     'skills.title': 'Tech Stack',
     'proj.title': 'Projects',
@@ -217,54 +217,57 @@ function initHeroCanvas() {
   const ctx = canvas.getContext('2d');
   let nodes = [], pulses = [], LINK = 40, frame = 0;
 
-  /* draw laptop shape onto offscreen canvas, return it */
+  /* draw laptop shape onto offscreen canvas — fits within canvas bounds */
   function buildMask(w, h) {
     const off = document.createElement('canvas');
     off.width = w; off.height = h;
     const c = off.getContext('2d');
     c.fillStyle = '#fff';
 
-    const sx = w * 0.18, sy = h * 0.04, sw = w * 0.64, sh = h * 0.46;
-    const B = 7; // bezel thickness
+    // Laptop — compact, fits inside hero
+    const LW  = Math.min(w * 0.48, h * 0.68, 560);
+    const cx  = w * 0.57;
+    const cy  = h * 0.42;
 
-    /* screen bezel */
-    c.fillRect(sx,       sy,       sw,  B);
-    c.fillRect(sx,       sy+sh-B,  sw,  B);
-    c.fillRect(sx,       sy,       B,   sh);
-    c.fillRect(sx+sw-B,  sy,       B,   sh);
+    // Screen
+    const sw = LW,  sh = LW * 0.60;
+    const sx = cx - sw / 2,  sy = cy - sh / 2 - LW * 0.16;
+    const B  = Math.max(4, LW * 0.012);
 
-    /* scanlines inside screen */
-    const gap = h * 0.030;
-    for (let ly = sy + B + gap; ly < sy + sh - B; ly += gap)
-      c.fillRect(sx + B, ly, sw - B * 2, 1.4);
+    c.fillRect(sx,       sy,       sw, B);
+    c.fillRect(sx,       sy+sh-B,  sw, B);
+    c.fillRect(sx,       sy,       B,  sh);
+    c.fillRect(sx+sw-B,  sy,       B,  sh);
 
-    /* hinge */
-    c.fillRect(w * 0.37, sy + sh, w * 0.26, h * 0.036);
+    const scanGap = sh / 9;
+    for (let ly = sy + B + scanGap * 0.7; ly < sy + sh - B; ly += scanGap)
+      c.fillRect(sx + B, ly, sw - B * 2, 1.5);
 
-    /* keyboard base */
-    const kx = w * 0.10, ky = sy + sh + h * 0.036;
-    const kw = w * 0.80, kh = h * 0.235;
-    const KB = 5;
-    c.fillRect(kx,       ky,       kw,  KB);
-    c.fillRect(kx,       ky+kh-KB, kw,  KB);
-    c.fillRect(kx,       ky,       KB,  kh);
-    c.fillRect(kx+kw-KB, ky,       KB,  kh);
+    // Hinge
+    c.fillRect(cx - LW * 0.14, sy + sh, LW * 0.28, LW * 0.04);
 
-    /* key grid: 3 rows × 14 cols */
-    const cols = 14, rows = 3;
-    const kaX = kx + KB + kw * 0.02;
-    const kaW = kw - KB * 2 - kw * 0.04;
-    const kaY = ky + kh * 0.09;
-    const kW  = kaW / cols;
-    const kH  = kh * 0.145;
-    const kRG = kH * 1.72;
+    // Base
+    const bw = LW * 1.06,  bh = LW * 0.28;
+    const bx = cx - bw / 2,  by = sy + sh + LW * 0.04;
+    const KB = Math.max(3, LW * 0.010);
+
+    c.fillRect(bx,       by,       bw, KB);
+    c.fillRect(bx,       by+bh-KB, bw, KB);
+    c.fillRect(bx,       by,       KB, bh);
+    c.fillRect(bx+bw-KB, by,       KB, bh);
+
+    // Key grid 3 × 12
+    const cols = 12, rows = 3;
+    const kaX = bx + KB + bw * 0.025, kaW = bw - KB * 2 - bw * 0.05;
+    const kaY = by + bh * 0.09;
+    const kW  = kaW / cols, kH = bh * 0.17, kRG = kH * 1.70;
     for (let r = 0; r < rows; r++)
       for (let col = 0; col < cols; col++)
-        c.fillRect(kaX + col * kW + kW * 0.07, kaY + r * kRG, kW * 0.82, kH);
+        c.fillRect(kaX + col * kW + kW * 0.08, kaY + r * kRG, kW * 0.80, kH);
 
-    /* trackpad */
-    c.strokeStyle = '#fff'; c.lineWidth = 2;
-    c.strokeRect(kx + kw * 0.35, ky + kh * 0.68, kw * 0.30, kh * 0.24);
+    // Trackpad
+    c.strokeStyle = '#fff'; c.lineWidth = 1.8;
+    c.strokeRect(bx + bw * 0.36, by + bh * 0.67, bw * 0.28, bh * 0.25);
 
     return off;
   }
