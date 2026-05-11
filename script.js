@@ -4,7 +4,7 @@ const i18n = {
   ko: {
     'nav.skills': '기술', 'nav.exp': '경력', 'nav.proj': '프로젝트', 'nav.certs': '자격증', 'nav.contact': '연락',
     'hero.caption': 'Developer',
-    'hero.tagline': '신뢰할 수 있는 동료가 되겠습니다.',
+    'hero.tagline': '작은 디테일의 차이가 견고한 시스템을 만든다고 확신합니다.',
     'hero.status': '재직중 · 핑거포스트',
     'skills.title': '기술 스택',
     'proj.title': '프로젝트',
@@ -36,7 +36,7 @@ const i18n = {
   en: {
     'nav.skills': 'Skills', 'nav.exp': 'Experience', 'nav.proj': 'Projects', 'nav.certs': 'Certs', 'nav.contact': 'Contact',
     'hero.caption': 'Developer',
-    'hero.tagline': 'A developer you can count on.',
+    'hero.tagline': 'Small details make the difference between fragile and solid.',
     'hero.status': 'Employed · Fingerpost',
     'skills.title': 'Tech Stack',
     'proj.title': 'Projects',
