@@ -4,7 +4,7 @@ const i18n = {
   ko: {
     'nav.skills': '기술', 'nav.exp': '경력', 'nav.proj': '프로젝트', 'nav.certs': '자격증', 'nav.contact': '연락',
     'hero.caption': 'Developer',
-    'hero.tagline': '협업으로 설계하고,<br>책임감으로 완성합니다.',
+    'hero.tagline': '복잡한 것을 단순하게,<br>단순한 것을 견고하게.',
     'hero.status': '재직중 · 핑거포스트',
     'skills.title': '기술 스택',
     'proj.title': '프로젝트',
@@ -36,7 +36,7 @@ const i18n = {
   en: {
     'nav.skills': 'Skills', 'nav.exp': 'Experience', 'nav.proj': 'Projects', 'nav.certs': 'Certs', 'nav.contact': 'Contact',
     'hero.caption': 'Developer',
-    'hero.tagline': 'Built through collaboration,<br>delivered with accountability.',
+    'hero.tagline': 'Simplify the complex,<br>solidify the simple.',
     'hero.status': 'Employed · Fingerpost',
     'skills.title': 'Tech Stack',
     'proj.title': 'Projects',
@@ -210,47 +210,130 @@ function initTerminal() {
 
 initTerminal();
 
-/* ── Hero canvas dot-wave ───────────────────────────── */
+/* ── Hero canvas — network graph ────────────────────── */
 function initHeroCanvas() {
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const STEP = 22;
-  let t = 0;
+  const ctx      = canvas.getContext('2d');
+  const LINK     = 125;
+  const N_HUB    = 7;
+  const N_NODE   = 150;
+  let nodes = [], pulses = [], frame = 0;
 
-  function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+  function mkNode(hub) {
+    const w = canvas.width, h = canvas.height;
+    const inLower = Math.random() < 0.82;
+    return {
+      x:   Math.random() * w,
+      y:   inLower ? h * 0.28 + Math.random() * h * 0.72 : Math.random() * h * 0.32,
+      vx:  (Math.random() - 0.5) * (hub ? 0.10 : 0.20),
+      vy:  (Math.random() - 0.5) * (hub ? 0.10 : 0.20),
+      r:   hub ? 3.2 + Math.random() * 1.8 : Math.random() * 1.3 + 0.5,
+      hub,
+    };
   }
 
-  function dotAlpha(x, y) {
-    const w = canvas.width, h = canvas.height;
-    const w1 = h * 0.68 + Math.sin(x / w * Math.PI * 2.4 + t)       * h * 0.13
-                         + Math.sin(x / w * Math.PI * 5.1 + t * 0.8) * h * 0.05;
-    const w2 = h * 0.80 + Math.sin(x / w * Math.PI * 3.2 - t * 1.2) * h * 0.10
-                         + Math.sin(x / w * Math.PI * 6.3 + t * 0.5) * h * 0.04;
-    const w3 = h * 0.58 + Math.sin(x / w * Math.PI * 4.0 + t * 0.9) * h * 0.09
-                         + Math.sin(x / w * Math.PI * 1.8 - t * 0.6) * h * 0.06;
-    const d1 = Math.max(0, 1 - Math.abs(y - w1) / (h * 0.17));
-    const d2 = Math.max(0, 1 - Math.abs(y - w2) / (h * 0.13));
-    const d3 = Math.max(0, 1 - Math.abs(y - w3) / (h * 0.11));
-    return Math.min(1, d1 * 0.9 + d2 * 0.8 + d3 * 0.7) * 0.28;
+  function init() {
+    nodes = [
+      ...Array.from({ length: N_HUB  }, () => mkNode(true)),
+      ...Array.from({ length: N_NODE }, () => mkNode(false)),
+    ];
+    pulses = [];
+  }
+
+  function spawnPulse() {
+    const useHub = Math.random() < 0.55;
+    const pool   = useHub ? nodes.filter(n => n.hub) : nodes;
+    const a = pool[Math.random() * pool.length | 0];
+    const b = nodes[Math.random() * nodes.length | 0];
+    if (a === b) return;
+    const dx = a.x - b.x, dy = a.y - b.y;
+    if (dx * dx + dy * dy < (LINK * 1.6) ** 2)
+      pulses.push({
+        a, b, p: 0,
+        sp:    0.007 + Math.random() * 0.009,
+        color: Math.random() < 0.35 ? '74,222,128' : '231,197,154',
+      });
   }
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    t += 0.005;
-    for (let x = 0; x <= canvas.width; x += STEP) {
-      for (let y = 0; y <= canvas.height; y += STEP) {
-        const a = dotAlpha(x, y);
-        if (a < 0.018) continue;
+    frame++;
+    const h = canvas.height, w = canvas.width;
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+    });
+
+    /* edges */
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 > LINK * LINK) continue;
+        const d      = Math.sqrt(d2);
+        const yf     = Math.max(a.y, b.y) / h;
+        const boost  = (a.hub || b.hub) ? 2.8 : 1;
+        const α      = Math.min((1 - d / LINK) * 0.18 * (0.08 + yf * 0.92) * boost, 0.4);
         ctx.beginPath();
-        ctx.arc(x, y, 1.3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${a})`;
-        ctx.fill();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = `rgba(255,255,255,${α})`;
+        ctx.lineWidth   = a.hub || b.hub ? 0.9 : 0.45;
+        ctx.stroke();
       }
     }
+
+    /* nodes */
+    nodes.forEach(n => {
+      const yf = n.y / h;
+      const α  = n.hub ? 0.75 : 0.04 + yf * 0.5;
+      if (n.hub) {
+        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 16);
+        g.addColorStop(0, `rgba(255,255,255,${α * 0.35})`);
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 16, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${α})`;
+      ctx.fill();
+    });
+
+    /* pulses */
+    pulses = pulses.filter(p => {
+      p.p += p.sp;
+      if (p.p >= 1) return false;
+      const x  = p.a.x + (p.b.x - p.a.x) * p.p;
+      const y  = p.a.y + (p.b.y - p.a.y) * p.p;
+      const yf = y / h;
+      const ia = 0.18 + yf * 0.82;
+      const c  = p.color;
+      const g  = ctx.createRadialGradient(x, y, 0, x, y, 9);
+      g.addColorStop(0, `rgba(${c},${0.65 * ia})`);
+      g.addColorStop(1, `rgba(${c},0)`);
+      ctx.beginPath(); ctx.arc(x, y, 9, 0, Math.PI * 2);
+      ctx.fillStyle = g; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${c},${ia})`; ctx.fill();
+      return true;
+    });
+
+    if (frame %  9 === 0) spawnPulse();
+    if (frame % 22 === 0) spawnPulse();
     requestAnimationFrame(draw);
+  }
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    init();
   }
 
   resize();
