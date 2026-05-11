@@ -3,315 +3,181 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>신진우 | Backend Developer</title>
+  <title>신진우 | Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ══ NAV ══ -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <!-- NAV -->
   <header class="nav" id="nav">
-    <div class="nav-left">
-      <div class="nav-badge">JW</div>
-      <div class="nav-meta">
-        <span data-i18n="nav.company">주식회사 핑거포스트</span>
-        <span class="nav-sep">|</span>
-        <span data-i18n="nav.role">백엔드 개발자</span>
-      </div>
-    </div>
     <nav class="nav-links">
       <a href="#skills"         data-i18n="nav.skills">기술</a>
       <a href="#experience"     data-i18n="nav.exp">경력</a>
+      <a href="#projects"       data-i18n="nav.proj">프로젝트</a>
       <a href="#certifications" data-i18n="nav.certs">자격증</a>
       <a href="#contact"        data-i18n="nav.contact">연락</a>
     </nav>
     <button class="lang-btn" id="langBtn">EN</button>
   </header>
 
-  <!-- ══ HERO ══ -->
+  <!-- HERO -->
   <section class="hero" id="hero">
-
-    <!-- Layer 0: 배경 이름 (빨강, 뒤쪽) -->
-    <div class="hero-bg-name" aria-hidden="true" id="bgName">신진우</div>
-
-    <!-- Layer 1: 좌측 인용구 -->
-    <div class="hero-quote">
-      <span class="qmark">"</span>
-      <p data-i18n="hero.q">버그를 두려워하지<br>않는 개발자,<br>오히려 버그에서<br>배웁니다.</p>
-      <cite data-i18n="hero.name.ko">신진우</cite>
+    <div class="hero-top">
+      <span class="hero-caption" data-i18n="hero.caption">Developer</span>
+      <span class="hero-since">2021 → Now</span>
     </div>
-
-    <!-- Layer 2: 인물 SVG (중앙, 이름 앞쪽) -->
-    <div class="hero-figure">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 570" fill="none" role="img" aria-label="신진우 프로필 일러스트">
-        <defs>
-          <linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#EEBC8A"/><stop offset="100%" stop-color="#D49660"/></linearGradient>
-          <linearGradient id="su" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1E2840"/><stop offset="100%" stop-color="#141C30"/></linearGradient>
-          <linearGradient id="pa" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1A2035"/><stop offset="100%" stop-color="#0F1525"/></linearGradient>
-          <filter id="sh"><feDropShadow dx="2" dy="6" stdDeviation="10" flood-color="#00000022"/></filter>
-        </defs>
-
-        <!-- Ground -->
-        <ellipse cx="160" cy="563" rx="82" ry="8" fill="#00000012"/>
-
-        <!-- Shoes -->
-        <path d="M86 540 Q73 546 70 557 Q74 566 106 566 Q128 566 128 557 L125 540Z" fill="#111827"/>
-        <path d="M234 540 Q247 546 250 557 Q246 566 214 566 Q192 566 192 557 L195 540Z" fill="#111827"/>
-        <path d="M76 554 Q98 550 120 553" stroke="#252D42" stroke-width="1.5" fill="none"/>
-        <path d="M244 554 Q222 550 200 553" stroke="#252D42" stroke-width="1.5" fill="none"/>
-
-        <!-- Trousers -->
-        <path d="M107 390 L100 540 Q104 550 118 550 Q132 550 134 540 L138 390Z" fill="url(#pa)"/>
-        <path d="M213 390 L220 540 Q216 550 202 550 Q188 550 186 540 L182 390Z" fill="url(#pa)"/>
-        <line x1="119" y1="402" x2="116" y2="534" stroke="#2A3550" stroke-width="1.5" opacity=".6"/>
-        <line x1="201" y1="402" x2="204" y2="534" stroke="#2A3550" stroke-width="1.5" opacity=".6"/>
-
-        <!-- Jacket body -->
-        <path d="M50 260 Q50 228 78 218 L108 212 L160 217 L212 212 L242 218 Q270 228 270 260 L274 402 Q274 412 262 412 L58 412 Q46 412 46 402Z" fill="url(#su)" filter="url(#sh)"/>
-
-        <!-- Shirt front -->
-        <path d="M133 216 L160 217 L166 412 L114 412Z" fill="#F5F4EF"/>
-
-        <!-- Lapels -->
-        <path d="M133 216 L104 213 L58 270 L88 273 L124 222Z" fill="#232E45"/>
-        <path d="M160 216 L188 213 L234 270 L210 274 L170 222Z" fill="#232E45"/>
-        <path d="M104 213 L58 270" stroke="#2D3A55" stroke-width="1" fill="none"/>
-        <path d="M188 213 L234 270" stroke="#2D3A55" stroke-width="1" fill="none"/>
-
-        <!-- Collar -->
-        <path d="M135 216 L148 233 L154 216Z" fill="#EEEEE8"/>
-        <path d="M167 216 L172 233 L148 233Z" fill="#E5E4DF"/>
-
-        <!-- Tie -->
-        <path d="M160 221 L151 251 L160 274 L169 251Z" fill="#E5002B"/>
-        <path d="M151 251 L156 398 L164 398 L169 251Z" fill="#B5001F"/>
-        <line x1="154" y1="278" x2="163" y2="278" stroke="#FF2040" stroke-width=".8" opacity=".35"/>
-        <line x1="153" y1="305" x2="164" y2="305" stroke="#FF2040" stroke-width=".8" opacity=".35"/>
-        <line x1="154" y1="332" x2="163" y2="332" stroke="#FF2040" stroke-width=".8" opacity=".35"/>
-        <line x1="153" y1="358" x2="164" y2="358" stroke="#FF2040" stroke-width=".8" opacity=".35"/>
-
-        <!-- Pocket square -->
-        <path d="M60 270 L80 264 L78 280 L58 278Z" fill="#E5002B"/>
-        <path d="M63 265 L74 264 L72 269Z" fill="#FF3355"/>
-
-        <!-- Jacket buttons -->
-        <circle cx="160" cy="308" r="3.5" fill="#1A2035"/><line x1="157" y1="308" x2="163" y2="308" stroke="#2A3550" stroke-width="1.5"/>
-        <circle cx="160" cy="330" r="3.5" fill="#1A2035"/><line x1="157" y1="330" x2="163" y2="330" stroke="#2A3550" stroke-width="1.5"/>
-        <circle cx="160" cy="352" r="3.5" fill="#1A2035"/><line x1="157" y1="352" x2="163" y2="352" stroke="#2A3550" stroke-width="1.5"/>
-
-        <!-- Shirt buttons -->
-        <circle cx="160" cy="240" r="2.2" fill="#CFCEC7"/>
-        <circle cx="160" cy="256" r="2.2" fill="#CFCEC7"/>
-        <circle cx="160" cy="272" r="2.2" fill="#CFCEC7"/>
-        <circle cx="160" cy="288" r="2.2" fill="#CFCEC7"/>
-
-        <!-- Arms -->
-        <path d="M50 260 Q32 287 28 348 Q26 380 34 404 L64 409 Q68 380 71 350 Q74 294 78 267Z" fill="url(#su)"/>
-        <path d="M270 260 Q288 287 292 348 Q294 380 286 404 L256 409 Q252 380 249 350 Q246 294 242 267Z" fill="url(#su)"/>
-
-        <!-- Sleeve cuff + buttons -->
-        <path d="M34 402 L66 408 Q68 415 64 420 L30 414 Q28 408 34 402Z" fill="#1A2035"/>
-        <line x1="36" y1="406" x2="62" y2="411" stroke="#2D3A55" stroke-width="1.2"/>
-        <path d="M256 408 L286 402 Q292 408 290 414 L256 420 Q252 415 256 408Z" fill="#1A2035"/>
-        <line x1="258" y1="411" x2="284" y2="406" stroke="#2D3A55" stroke-width="1.2"/>
-
-        <!-- Hands -->
-        <path d="M32 413 Q22 420 20 432 Q22 446 36 443 Q48 443 56 434 L64 418Z" fill="url(#sk)"/>
-        <path d="M25 428 Q22 436 26 441" stroke="#C09068" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        <path d="M31 422 Q28 432 32 439" stroke="#C09068" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        <path d="M38 418 Q35 428 38 436" stroke="#C09068" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        <path d="M288 413 Q298 420 300 432 Q298 446 284 443 Q272 443 264 434 L256 418Z" fill="url(#sk)"/>
-        <path d="M295 428 Q298 436 294 441" stroke="#C09068" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        <path d="M289 422 Q292 432 288 439" stroke="#C09068" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        <path d="M282 418 Q285 428 282 436" stroke="#C09068" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-
-        <!-- Watch -->
-        <rect x="252" y="404" width="20" height="11" rx="3" fill="#C8B080"/>
-        <rect x="255" y="406" width="14" height="7" rx="2" fill="#1E2840"/>
-        <line x1="259" y1="409" x2="265" y2="409" stroke="#58A6FF" stroke-width="1" opacity=".8"/>
-
-        <!-- Neck -->
-        <path d="M140 207 L180 207 L178 233 Q160 240 142 233Z" fill="url(#sk)"/>
-
-        <!-- Head -->
-        <ellipse cx="160" cy="145" rx="63" ry="71" fill="url(#sk)" filter="url(#sh)"/>
-        <ellipse cx="160" cy="175" rx="38" ry="24" fill="#C88A62" opacity=".1"/>
-
-        <!-- Ears -->
-        <path d="M97 137 Q86 143 85 156 Q86 170 97 175 Q104 165 103 156 Q103 145 97 137Z" fill="#D09060"/>
-        <path d="M93 150 Q91 157 93 164" stroke="#B07848" stroke-width="1.5" fill="none"/>
-        <path d="M223 137 Q234 143 235 156 Q234 170 223 175 Q216 165 217 156 Q217 145 223 137Z" fill="#D09060"/>
-        <path d="M227 150 Q229 157 227 164" stroke="#B07848" stroke-width="1.5" fill="none"/>
-
-        <!-- Hair -->
-        <path d="M97 124 Q96 73 132 63 Q160 56 188 63 Q222 75 223 124 Q213 86 196 76 Q176 67 160 68 Q142 67 124 76 Q105 88 97 124Z" fill="#0E0600"/>
-        <path d="M96 98 L93 140 Q94 130 98 124Z" fill="#0E0600"/>
-        <path d="M224 98 L227 140 Q226 130 222 124Z" fill="#0E0600"/>
-        <path d="M128 66 Q156 60 180 67" stroke="#3D2010" stroke-width="1.8" fill="none" opacity=".35"/>
-
-        <!-- Eyebrows -->
-        <path d="M108 114 Q122 107 140 112" stroke="#0E0600" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-        <path d="M180 112 Q198 107 212 114" stroke="#0E0600" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-
-        <!-- Eye sockets (shadow) -->
-        <ellipse cx="124" cy="133" rx="20" ry="13" fill="#C88A62" opacity=".15"/>
-        <ellipse cx="196" cy="133" rx="20" ry="13" fill="#C88A62" opacity=".15"/>
-
-        <!-- Left eye -->
-        <ellipse cx="124" cy="134" rx="15" ry="10" fill="white"/>
-        <circle cx="126" cy="135" r="8.5" fill="#2D1808"/>
-        <circle cx="126" cy="135" r="6" fill="#0E0600"/>
-        <circle cx="129" cy="131" r="2.8" fill="white"/>
-        <circle cx="123" cy="137" r="1.2" fill="white" opacity=".5"/>
-        <path d="M109 129 Q124 123 139 129" stroke="#0E0600" stroke-width="1.6" fill="none"/>
-        <path d="M109 140 Q124 145 139 140" stroke="#B07848" stroke-width=".9" fill="none" opacity=".45"/>
-
-        <!-- Right eye -->
-        <ellipse cx="196" cy="134" rx="15" ry="10" fill="white"/>
-        <circle cx="194" cy="135" r="8.5" fill="#2D1808"/>
-        <circle cx="194" cy="135" r="6" fill="#0E0600"/>
-        <circle cx="197" cy="131" r="2.8" fill="white"/>
-        <circle cx="191" cy="137" r="1.2" fill="white" opacity=".5"/>
-        <path d="M181 129 Q196 123 211 129" stroke="#0E0600" stroke-width="1.6" fill="none"/>
-        <path d="M181 140 Q196 145 211 140" stroke="#B07848" stroke-width=".9" fill="none" opacity=".45"/>
-
-        <!-- Nose -->
-        <path d="M160 148 Q156 160 153 165" stroke="#C08860" stroke-width="1.5" fill="none" opacity=".4"/>
-        <path d="M151 163 Q160 170 169 163 Q165 173 160 173 Q155 173 151 163Z" fill="#C08060" opacity=".4"/>
-        <ellipse cx="152" cy="169" rx="5" ry="4" fill="#B06848" opacity=".28"/>
-        <ellipse cx="168" cy="169" rx="5" ry="4" fill="#B06848" opacity=".28"/>
-
-        <!-- Mouth / smile -->
-        <path d="M143 183 Q152 178 160 180 Q168 178 177 183 Q171 189 160 187 Q149 189 143 183Z" fill="#B87060"/>
-        <path d="M143 183 Q160 197 177 183 Q170 196 160 197 Q150 196 143 183Z" fill="#C88070"/>
-        <path d="M143 184 Q160 188 177 184" stroke="#A06050" stroke-width=".8" fill="none" opacity=".55"/>
-
-        <!-- Cheeks -->
-        <ellipse cx="104" cy="160" rx="20" ry="13" fill="#E8906A" opacity=".13"/>
-        <ellipse cx="216" cy="160" rx="20" ry="13" fill="#E8906A" opacity=".13"/>
-      </svg>
-    </div>
-
-    <!-- Layer 3: 우측 장식 (해칭 연차) -->
-    <div class="hero-deco" aria-hidden="true">
-      <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="hp" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="8" stroke="#111" stroke-width="1.8"/>
-          </pattern>
-          <mask id="hm">
-            <text x="2" y="178" font-family="'Black Han Sans',sans-serif" font-size="175" fill="white">3Y</text>
-          </mask>
-        </defs>
-        <rect width="180" height="200" fill="url(#hp)" mask="url(#hm)"/>
-        <text x="2" y="178" font-family="'Black Han Sans',sans-serif" font-size="175" fill="none" stroke="#111" stroke-width="2">3Y</text>
-      </svg>
-    </div>
-
-    <!-- Layer 4: 하단 카드 -->
-    <div class="hero-cards">
-      <div class="hcard hcard-skills">
-        <p class="hcard-label" data-i18n="hcard.label">주요 기술 스택</p>
-        <div class="hcard-tags">
-          <span>Java</span><span>Spring Boot</span><span>Node.js</span><span>Docker</span>
+    <h1 class="hero-name" data-i18n="hero.name.ko">신진우</h1>
+    <div class="hero-body">
+      <div class="hero-left">
+        <p class="hero-tagline" data-i18n="hero.tagline">협업으로 설계하고,<br>책임감으로 완성합니다.</p>
+        <div class="hero-pills">
+          <span class="pill pill-ghost">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 21C8 17 4 14.4 4 10a8 8 0 1 1 16 0c0 4.4-4 7-8 11z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            Seoul, Korea
+          </span>
+          <span class="pill pill-status">
+            <span class="status-dot"></span>
+            <span data-i18n="hero.status">재직중 · 핑거포스트</span>
+          </span>
         </div>
-        <a href="#skills" class="hcard-more" data-i18n="hcard.more">더 보기 →</a>
       </div>
-      <div class="hcard hcard-current">
-        <span class="hcard-badge" data-i18n="hcard.badge">재직중</span>
-        <p class="hcard-company" data-i18n="hcard.company">주식회사 핑거포스트</p>
-        <p class="hcard-role" data-i18n="hcard.role">백엔드 개발자</p>
-        <p class="hcard-since">2025.09 →</p>
+      <div class="hero-terminal" id="heroTerminal" aria-hidden="true">
+        <div class="terminal-bar">
+          <span class="t-dot t-red"></span>
+          <span class="t-dot t-yellow"></span>
+          <span class="t-dot t-green"></span>
+        </div>
+        <div class="terminal-body" id="terminalBody"></div>
       </div>
     </div>
   </section>
 
-  <!-- ══ SKILLS ══ -->
+  <!-- TICKER -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>Java</span><span>Spring Boot</span><span>Spring</span><span>Node.js</span><span>Nest.js</span><span>Express.js</span><span>Go</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span><span>Docker</span><span>AWS</span><span>Git</span>
+      </div>
+      <div class="ticker-track" aria-hidden="true">
+        <span>Java</span><span>Spring Boot</span><span>Spring</span><span>Node.js</span><span>Nest.js</span><span>Express.js</span><span>Go</span><span>JavaScript</span><span>TypeScript</span><span>React</span><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span><span>Docker</span><span>AWS</span><span>Git</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
   <section class="section" id="skills">
-    <div class="section-inner">
-      <h2 class="sec-title" data-i18n="skills.title">기술 스택</h2>
+    <div class="container">
+      <header class="sec-header">
+        <h2 class="sec-title" data-i18n="skills.title">기술 스택</h2>
+        <span class="sec-num">01</span>
+      </header>
       <div class="skills-grid">
-        <div class="sk-card">
-          <h3 class="sk-cat">Backend</h3>
-          <ul class="tag-list">
-            <li>Java</li><li>Spring Boot</li><li>Spring</li>
-            <li>Node.js</li><li>Nest.js</li><li>Express.js</li>
-          </ul>
+        <div class="skill-card reveal">
+          <p class="skill-cat">Server-Side</p>
+          <div class="tag-cloud">
+            <span>Java</span><span>Spring Boot</span><span>Spring</span>
+            <span>Node.js</span><span>Nest.js</span><span>Express.js</span><span>Go</span>
+          </div>
         </div>
-        <div class="sk-card">
-          <h3 class="sk-cat">Frontend</h3>
-          <ul class="tag-list">
-            <li>JavaScript</li><li>TypeScript</li><li>React</li>
-            <li>HTML</li><li>CSS</li>
-          </ul>
+        <div class="skill-card reveal">
+          <p class="skill-cat">Frontend</p>
+          <div class="tag-cloud">
+            <span>JavaScript</span><span>TypeScript</span><span>React</span>
+            <span>HTML</span><span>CSS</span>
+          </div>
         </div>
-        <div class="sk-card">
-          <h3 class="sk-cat">Database</h3>
-          <ul class="tag-list">
-            <li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li>
-          </ul>
+        <div class="skill-card reveal">
+          <p class="skill-cat">Database</p>
+          <div class="tag-cloud">
+            <span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>Redis</span>
+          </div>
         </div>
-        <div class="sk-card">
-          <h3 class="sk-cat">DevOps / Tools</h3>
-          <ul class="tag-list">
-            <li>Docker</li><li>AWS</li><li>Git</li>
-          </ul>
+        <div class="skill-card reveal">
+          <p class="skill-cat">DevOps / Tools</p>
+          <div class="tag-cloud">
+            <span>Docker</span><span>AWS</span><span>Git</span><span>JPA</span><span>TypeORM</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ EXPERIENCE ══ -->
-  <section class="section section-dark" id="experience">
-    <div class="section-inner">
-      <h2 class="sec-title light" data-i18n="exp.title">경력</h2>
-      <p class="sec-sub light" data-i18n="exp.total">총 3년 10개월</p>
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="container">
+      <header class="sec-header">
+        <h2 class="sec-title" data-i18n="exp.title">경력</h2>
+        <span class="sec-num">02</span>
+      </header>
+      <p class="sec-sub" data-i18n="exp.total">총 4년 이상</p>
       <ol class="timeline">
 
-        <li class="tl-item">
+        <li class="tl-item reveal">
           <div class="tl-left">
-            <span class="tl-period">2025.09 —</span>
-            <span class="tl-now" data-i18n="exp.now">현재</span>
+            <span class="tl-date">2025.09 —</span>
+            <span class="pill pill-now" data-i18n="exp.now">현재</span>
           </div>
           <div class="tl-right">
-            <h3 class="tl-company" data-i18n="exp.c1">주식회사 핑거포스트</h3>
-            <p class="tl-role" data-i18n="exp.r1">백엔드 개발자</p>
+            <h3 class="tl-company" data-i18n="exp.c0">주식회사 핑거포스트</h3>
+            <p class="tl-role" data-i18n="exp.r0"></p>
             <ul class="tl-bullets">
-              <li data-i18n="exp.c1b1">Java / Spring Boot 기반 백엔드 시스템 개발 및 운영</li>
-              <li data-i18n="exp.c1b2">REST API 설계 및 운영 자동화</li>
+              <li data-i18n="exp.c0b1">Java / Spring Boot 기반 시스템 설계 및 개발</li>
+              <li data-i18n="exp.c0b2">REST API 설계 및 운영 자동화</li>
             </ul>
           </div>
         </li>
 
-        <li class="tl-item">
+        <li class="tl-item reveal">
           <div class="tl-left">
-            <span class="tl-period">2022.12 —<br>2025.01</span>
-            <span class="tl-dur" data-i18n="exp.d2">2년 2개월</span>
+            <span class="tl-date">2024.01 —<br>2025.01</span>
+            <span class="tl-dur" data-i18n="exp.d1">1년 2개월</span>
+          </div>
+          <div class="tl-right">
+            <h3 class="tl-company" data-i18n="exp.c1">크림소프트</h3>
+            <p class="tl-role" data-i18n="exp.r1">솔루션사업부</p>
+            <ul class="tl-bullets">
+              <li data-i18n="exp.c1b1">공공안전 분야 SI 프로젝트 개발 (Java, Spring Boot)</li>
+              <li data-i18n="exp.c1b2">범죄 위험도 예측 분석 시스템 구현 (PostgreSQL, Geoserver 연동)</li>
+              <li data-i18n="exp.c1b3">자율방범대 관리시스템 개발 (JPA, MySQL)</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="tl-item reveal">
+          <div class="tl-left">
+            <span class="tl-date">2022.12 —<br>2024.01</span>
+            <span class="tl-dur" data-i18n="exp.d2">1년 2개월</span>
           </div>
           <div class="tl-right">
             <h3 class="tl-company" data-i18n="exp.c2">디투이노베이션</h3>
-            <p class="tl-role" data-i18n="exp.r2">솔루션사업부 대리 · 백엔드 개발자</p>
+            <p class="tl-role" data-i18n="exp.r2">솔루션사업부 대리</p>
             <ul class="tl-bullets">
-              <li data-i18n="exp.c2b1">솔루션 사업부 백엔드 개발 및 API 고도화</li>
-              <li data-i18n="exp.c2b2"><strong>API 응답 속도 40% 단축</strong> — 성능 개선과 기능 확장 병행</li>
-              <li data-i18n="exp.c2b3">배포 후 장애 원인 분석 및 재발 방지 대책 수립</li>
+              <li data-i18n="exp.c2b1">공공안전 솔루션 개발 (총포화약 관리, 경비업 관리시스템 등)</li>
+              <li data-i18n="exp.c2b2">외부 기관 연계 서비스 구현 (네이버, 경찰청 자격증 API 연동)</li>
+              <li data-i18n="exp.c2b3">배포 후 장애 원인 분석 및 재발 방지 체계 수립</li>
             </ul>
           </div>
         </li>
 
-        <li class="tl-item">
+        <li class="tl-item reveal">
           <div class="tl-left">
-            <span class="tl-period">2021.10 —<br>2022.11</span>
-            <span class="tl-dur" data-i18n="exp.d3">1년 2개월</span>
+            <span class="tl-date">2021.10 —<br>2022.11</span>
+            <span class="tl-dur" data-i18n="exp.d3">1년 1개월</span>
           </div>
           <div class="tl-right">
             <h3 class="tl-company" data-i18n="exp.c3">맥스테드</h3>
-            <p class="tl-role" data-i18n="exp.r3">SI개발부 사원 · 백엔드 개발자</p>
+            <p class="tl-role" data-i18n="exp.r3">SI개발부 사원</p>
             <ul class="tl-bullets">
-              <li data-i18n="exp.c3b1">SI 프로젝트 백엔드 개발 참여</li>
-              <li data-i18n="exp.c3b2">REST API 개발 및 DB 연동</li>
+              <li data-i18n="exp.c3b1">차세대 사회보장 정보시스템 개발 (Java, eGov, Oracle)</li>
+              <li data-i18n="exp.c3b2">WebSocket 기반 채팅 및 알림 시스템 구현</li>
+              <li data-i18n="exp.c3b3">실내측위를 위한 융합데이터 세트 개발 (Spring Boot, PostgreSQL)</li>
             </ul>
           </div>
         </li>
@@ -320,48 +186,225 @@
     </div>
   </section>
 
-  <!-- ══ CERTIFICATIONS + EDUCATION ══ -->
-  <section class="section" id="certifications">
-    <div class="section-inner cert-edu-wrap">
-      <div>
-        <h2 class="sec-title" data-i18n="cert.title">자격증</h2>
-        <ul class="cert-list">
-          <li class="cert-item">
-            <span class="cert-date">2024.06</span>
-            <div><p class="cert-name" data-i18n="cert.c1">정보처리기사</p><p class="cert-org" data-i18n="cert.o1">한국산업인력공단</p></div>
-          </li>
-          <li class="cert-item">
-            <span class="cert-date">2021.10</span>
-            <div><p class="cert-name" data-i18n="cert.c2">SQL 개발자 (SQLD)</p><p class="cert-org" data-i18n="cert.o2">한국데이터산업진흥원</p></div>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h2 class="sec-title" data-i18n="edu.title">학력</h2>
-        <ul class="cert-list">
-          <li class="cert-item">
-            <span class="cert-date">2012 — 2020</span>
-            <div><p class="cert-name" data-i18n="edu.school">대진대학교</p><p class="cert-org" data-i18n="edu.major">토목공학과 · 졸업 · 학점 3.26 / 4.5</p></div>
-          </li>
-        </ul>
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <header class="sec-header">
+        <h2 class="sec-title" data-i18n="proj.title">프로젝트</h2>
+        <span class="sec-num">03</span>
+      </header>
+      <div class="proj-grid">
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2023.12</span>
+            <div class="proj-links"></div>
+          </div>
+          <h3 class="proj-name">네이버 자격증 서비스</h3>
+          <p class="proj-desc">총포·화약류 허가증을 모바일로 확인하는 경찰청–네이버 연계 API 서버 개발</p>
+          <div class="tag-cloud"><span>Java</span><span>Spring MVC</span><span>JWT</span><span>Bcrypt</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.02</span>
+            <div class="proj-links">
+              <a href="https://github.com/tlswlsdntks/opgg" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub</a>
+            </div>
+          </div>
+          <h3 class="proj-name">롤 전적 검색 서비스</h3>
+          <p class="proj-desc">Riot API를 활용한 리그 오브 레전드 전적 조회 및 매치 분석 서비스</p>
+          <div class="tag-cloud"><span>Node.js</span><span>Express</span><span>React</span><span>Riot API</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.04</span>
+            <div class="proj-links">
+              <a href="https://github.com/tlswlsdntks/my-blockchain" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub</a>
+            </div>
+          </div>
+          <h3 class="proj-name">이더리움 하드포크</h3>
+          <p class="proj-desc">블록 난이도·채굴 보상 정책을 조정한 커스텀 이더리움 테스트넷 구축</p>
+          <div class="tag-cloud"><span>Go</span><span>Geth</span><span>React</span><span>TypeScript</span><span>GCP</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.05</span>
+            <div class="proj-links">
+              <a href="https://github.com/tlswlsdntks/node-sns" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub</a>
+            </div>
+          </div>
+          <h3 class="proj-name">SNS 서비스</h3>
+          <p class="proj-desc">Passport OAuth, Redis 세션, AWS S3·Lambda를 활용한 SNS 서버</p>
+          <div class="tag-cloud"><span>Node.js</span><span>Express</span><span>MySQL</span><span>Redis</span><span>AWS</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.05</span>
+            <div class="proj-links"></div>
+          </div>
+          <h3 class="proj-name">실시간 채팅 서비스</h3>
+          <p class="proj-desc">Socket.IO 이벤트 기반 양방향 통신과 MongoDB 스키마 설계로 구현한 채팅 서비스</p>
+          <div class="tag-cloud"><span>Node.js</span><span>MongoDB</span><span>Socket.IO</span><span>Mongoose</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.06</span>
+            <div class="proj-links">
+              <a href="https://github.com/tlswlsdntks/node-auction" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub</a>
+            </div>
+          </div>
+          <h3 class="proj-name">실시간 경매 서비스</h3>
+          <p class="proj-desc">Socket.IO와 SSE를 목적에 따라 분리 설계한 실시간 입찰·낙찰 처리 서비스</p>
+          <div class="tag-cloud"><span>Node.js</span><span>MySQL</span><span>Socket.IO</span><span>SSE</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.06</span>
+            <div class="proj-links">
+              <a href="https://github.com/tlswlsdntks/nest-sns-api" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub</a>
+            </div>
+          </div>
+          <h3 class="proj-name">NestJS SNS API</h3>
+          <p class="proj-desc">TypeORM 트랜잭션 처리와 Basic/Bearer/JWT 인증 방식을 구현한 SNS REST API</p>
+          <div class="tag-cloud"><span>TypeScript</span><span>Nest.js</span><span>PostgreSQL</span><span>TypeORM</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.06</span>
+            <div class="proj-links">
+              <a href="https://github.com/tlswlsdntks/phaser3-game" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub</a>
+              <a href="https://tlswlsdntks.github.io/phaser3-game/" target="_blank" rel="noopener noreferrer" class="proj-link">Live</a>
+            </div>
+          </div>
+          <h3 class="proj-name">Phaser3 게임 서비스</h3>
+          <p class="proj-desc">로그라이크 요소를 갖춘 HTML5 캐주얼 게임 (씬·애니메이션 생명주기 관리)</p>
+          <div class="tag-cloud"><span>JavaScript</span><span>Phaser</span><span>React</span><span>Webpack</span></div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-meta">
+            <span class="proj-year">2025.06</span>
+            <div class="proj-links">
+              <a href="https://github.com/tlswlsdntks/parallax" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub</a>
+              <a href="https://tlswlsdntks.github.io/parallax/" target="_blank" rel="noopener noreferrer" class="proj-link">Live</a>
+            </div>
+          </div>
+          <h3 class="proj-name">인터랙티브 웹 서비스</h3>
+          <p class="proj-desc">마우스 인터랙션·반응형 페럴렉스를 requestAnimationFrame으로 구현한 웹 서비스</p>
+          <div class="tag-cloud"><span>JavaScript</span><span>HTML5</span><span>CSS3</span></div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══ CONTACT ══ -->
-  <section class="section section-red" id="contact">
-    <div class="section-inner contact-wrap">
-      <h2 class="sec-title light" data-i18n="contact.title">연락하기</h2>
-      <p class="contact-desc light" data-i18n="contact.desc">새로운 기회나 협업 제안은 언제든지 환영합니다.</p>
-      <div class="contact-links">
-        <a href="mailto:tlswlsdnehd@gmail.com" class="cbtn cbtn-light">tlswlsdnehd@gmail.com</a>
-        <a href="tel:010-3717-6834" class="cbtn cbtn-outline-light">010-3717-6834</a>
+  <!-- CERTIFICATIONS + EDUCATION -->
+  <section class="section" id="certifications">
+    <div class="container">
+      <div class="cert-edu-grid">
+
+        <div class="reveal">
+          <header class="sec-header">
+            <h2 class="sec-title" data-i18n="cert.title">자격증</h2>
+            <span class="sec-num">04</span>
+          </header>
+          <ul class="cert-list">
+            <li class="cert-item">
+              <span class="cert-date">2024.06</span>
+              <div>
+                <p class="cert-name" data-i18n="cert.c1">정보처리기사</p>
+                <p class="cert-org" data-i18n="cert.o1">한국산업인력공단</p>
+              </div>
+            </li>
+            <li class="cert-item">
+              <span class="cert-date">2021.10</span>
+              <div>
+                <p class="cert-name" data-i18n="cert.c2">SQL 개발자 (SQLD)</p>
+                <p class="cert-org" data-i18n="cert.o2">한국데이터산업진흥원</p>
+              </div>
+            </li>
+            <li class="cert-item">
+              <span class="cert-date">2019.07</span>
+              <div>
+                <p class="cert-name" data-i18n="cert.c3">토목기사</p>
+                <p class="cert-org" data-i18n="cert.o3">한국산업인력공단</p>
+              </div>
+            </li>
+            <li class="cert-item">
+              <span class="cert-date">2015</span>
+              <div>
+                <p class="cert-name" data-i18n="cert.c4">자동차 운전면허 1종</p>
+                <p class="cert-org" data-i18n="cert.o4">도로교통공단</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="reveal">
+          <header class="sec-header">
+            <h2 class="sec-title" data-i18n="edu.title">학력</h2>
+            <span class="sec-num">05</span>
+          </header>
+          <ul class="cert-list">
+            <li class="cert-item">
+              <span class="cert-date">2012 — 2020</span>
+              <div>
+                <p class="cert-name" data-i18n="edu.school">대진대학교</p>
+                <p class="cert-org" data-i18n="edu.major">토목공학과 · 졸업 · 학점 3.26 / 4.5</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+      <header class="sec-header">
+        <h2 class="sec-title" data-i18n="contact.title">연락하기</h2>
+        <span class="sec-num">06</span>
+      </header>
+      <div class="contact-body reveal">
+        <p class="contact-desc" data-i18n="contact.desc">새로운 기회나 협업 제안은 언제든지 환영합니다.</p>
+        <div class="contact-pills">
+          <a href="mailto:tlswlsdnehd@gmail.com" class="pill pill-violet">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
+            </svg>
+            tlswlsdnehd@gmail.com
+          </a>
+          <a href="tel:010-3717-6834" class="pill pill-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            010-3717-6834
+          </a>
+          <a href="https://github.com/tlswlsdntks" target="_blank" rel="noopener noreferrer" class="pill pill-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
   <footer class="footer">
-    <p data-i18n="footer">© 2026 신진우. Built with HTML, CSS &amp; JS.</p>
+    <div class="container footer-inner">
+      <p data-i18n="footer">© 2026 신진우. Built with HTML, CSS &amp; JS.</p>
+      <a href="mailto:tlswlsdnehd@gmail.com" class="footer-link">tlswlsdnehd@gmail.com</a>
+    </div>
   </footer>
 
   <script src="script.js"></script>
