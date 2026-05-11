@@ -31,7 +31,7 @@ const i18n = {
     'cert.c4': '자동차 운전면허 1종', 'cert.o4': '도로교통공단',
     'edu.title': '학력', 'edu.school': '대진대학교', 'edu.major': '토목공학과 · 졸업 · 학점 3.26 / 4.5',
     'contact.title': '연락하기', 'contact.desc': '새로운 기회나 협업 제안은 언제든지 환영합니다.',
-    'footer': '© 2026 · Built with HTML, CSS & JS.',
+    'footer': '© 2026 신진우. Built with HTML, CSS & JS.',
   },
   en: {
     'nav.skills': 'Skills', 'nav.exp': 'Experience', 'nav.proj': 'Projects', 'nav.certs': 'Certs', 'nav.contact': 'Contact',
@@ -63,7 +63,7 @@ const i18n = {
     'cert.c4': "Driver's License Class 1", 'cert.o4': 'Road Traffic Authority',
     'edu.title': 'Education', 'edu.school': 'Daejin University', 'edu.major': 'Civil Engineering · Graduated · GPA 3.26/4.5',
     'contact.title': 'Get in Touch', 'contact.desc': 'Open to new opportunities and collaboration.',
-    'footer': '© 2026 · Built with HTML, CSS & JS.',
+    'footer': '© 2026 Jinwoo Shin. Built with HTML, CSS & JS.',
   },
 };
 
