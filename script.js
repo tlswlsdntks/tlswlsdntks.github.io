@@ -214,157 +214,112 @@ initTerminal();
 function initHeroCanvas() {
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let nodes = [], pulses = [], LINK = 40, frame = 0;
+  const ctx    = canvas.getContext('2d');
+  const LINK   = 175;
+  const N_HUB  = 12;
+  const N_NODE = 280;
+  let nodes = [], pulses = [], frame = 0;
 
-  /* draw laptop shape onto offscreen canvas — fits within canvas bounds */
-  function buildMask(w, h) {
-    const off = document.createElement('canvas');
-    off.width = w; off.height = h;
-    const c = off.getContext('2d');
-    c.fillStyle = '#fff';
-
-    // Laptop — compact, fits inside hero
-    const LW  = Math.min(w * 0.48, h * 0.68, 560);
-    const cx  = w * 0.57;
-    const cy  = h * 0.42;
-
-    // Screen
-    const sw = LW,  sh = LW * 0.60;
-    const sx = cx - sw / 2,  sy = cy - sh / 2 - LW * 0.16;
-    const B  = Math.max(4, LW * 0.012);
-
-    c.fillRect(sx,       sy,       sw, B);
-    c.fillRect(sx,       sy+sh-B,  sw, B);
-    c.fillRect(sx,       sy,       B,  sh);
-    c.fillRect(sx+sw-B,  sy,       B,  sh);
-
-    const scanGap = sh / 9;
-    for (let ly = sy + B + scanGap * 0.7; ly < sy + sh - B; ly += scanGap)
-      c.fillRect(sx + B, ly, sw - B * 2, 1.5);
-
-    // Hinge
-    c.fillRect(cx - LW * 0.14, sy + sh, LW * 0.28, LW * 0.04);
-
-    // Base
-    const bw = LW * 1.06,  bh = LW * 0.28;
-    const bx = cx - bw / 2,  by = sy + sh + LW * 0.04;
-    const KB = Math.max(3, LW * 0.010);
-
-    c.fillRect(bx,       by,       bw, KB);
-    c.fillRect(bx,       by+bh-KB, bw, KB);
-    c.fillRect(bx,       by,       KB, bh);
-    c.fillRect(bx+bw-KB, by,       KB, bh);
-
-    // Key grid 3 × 12
-    const cols = 12, rows = 3;
-    const kaX = bx + KB + bw * 0.025, kaW = bw - KB * 2 - bw * 0.05;
-    const kaY = by + bh * 0.09;
-    const kW  = kaW / cols, kH = bh * 0.17, kRG = kH * 1.70;
-    for (let r = 0; r < rows; r++)
-      for (let col = 0; col < cols; col++)
-        c.fillRect(kaX + col * kW + kW * 0.08, kaY + r * kRG, kW * 0.80, kH);
-
-    // Trackpad
-    c.strokeStyle = '#fff'; c.lineWidth = 1.8;
-    c.strokeRect(bx + bw * 0.36, by + bh * 0.67, bw * 0.28, bh * 0.25);
-
-    return off;
-  }
-
-  /* sample filled pixels → node positions */
-  function sampleMask(off, step) {
-    const d = off.getContext('2d').getImageData(0, 0, off.width, off.height).data;
-    const pts = [];
-    for (let y = 0; y < off.height; y += step)
-      for (let x = 0; x < off.width; x += step)
-        if (d[(y * off.width + x) * 4 + 3] > 80)
-          pts.push({ x: x + (Math.random()-.5)*step*.4,
-                     y: y + (Math.random()-.5)*step*.4 });
-    return pts;
+  function mkNode(hub) {
+    const w = canvas.width, h = canvas.height;
+    return {
+      x:  Math.random() * w,
+      y:  Math.random() * h,
+      vx: (Math.random() - 0.5) * (hub ? 0.08 : 0.14),
+      vy: (Math.random() - 0.5) * (hub ? 0.08 : 0.14),
+      r:  hub ? 4.5 + Math.random() * 2 : Math.random() * 1.6 + 0.6,
+      hub,
+    };
   }
 
   function init() {
-    const w = canvas.width, h = canvas.height;
-    const step = Math.max(9, Math.floor(w / 115));
-    LINK = step * 3.4;
-    const pts = sampleMask(buildMask(w, h), step);
-    nodes = pts.map(p => ({
-      x: p.x, y: p.y, ox: p.x, oy: p.y,
-      vx: (Math.random()-.5) * .12,
-      vy: (Math.random()-.5) * .12,
-      r:  Math.random() * 1.3 + .55,
-      hub: Math.random() < .038,
-    }));
+    nodes = [
+      ...Array.from({ length: N_HUB  }, () => mkNode(true)),
+      ...Array.from({ length: N_NODE }, () => mkNode(false)),
+    ];
     pulses = [];
   }
 
   function spawnPulse() {
-    if (!nodes.length) return;
-    const a = nodes[Math.random() * nodes.length | 0];
+    const pool = Math.random() < 0.6 ? nodes.filter(n => n.hub) : nodes;
+    const a = pool[Math.random() * pool.length | 0];
     const b = nodes[Math.random() * nodes.length | 0];
     if (a === b) return;
     const dx = a.x - b.x, dy = a.y - b.y;
-    if (dx*dx + dy*dy < (LINK*1.6)**2)
-      pulses.push({ a, b, p: 0,
-        sp: .009 + Math.random()*.009,
-        color: Math.random() < .4 ? '74,222,128' : '231,197,154' });
+    if (dx * dx + dy * dy < (LINK * 1.4) ** 2)
+      pulses.push({
+        a, b, p: 0,
+        sp:    0.006 + Math.random() * 0.008,
+        color: Math.random() < 0.4 ? '74,222,128' : '231,197,154',
+      });
   }
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     frame++;
-    const LS = LINK * LINK;
+    const h = canvas.height, w = canvas.width;
 
-    /* spring drift */
     nodes.forEach(n => {
-      n.vx += (n.ox - n.x) * .00022; n.vy += (n.oy - n.y) * .00022;
-      n.vx *= .993; n.vy *= .993;
-      n.x += n.vx;  n.y += n.vy;
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
     });
 
     /* edges */
     for (let i = 0; i < nodes.length; i++) {
-      for (let j = i+1; j < nodes.length; j++) {
+      for (let j = i + 1; j < nodes.length; j++) {
         const a = nodes[i], b = nodes[j];
-        const dx = a.x-b.x, dy = a.y-b.y, d2 = dx*dx+dy*dy;
-        if (d2 > LS) continue;
-        const boost = (a.hub||b.hub) ? 2.4 : 1;
-        const α = Math.min((1 - Math.sqrt(d2)/LINK) * .30 * boost, .55);
-        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 > LINK * LINK) continue;
+        const d     = Math.sqrt(d2);
+        const boost = (a.hub || b.hub) ? 3.2 : 1;
+        const α     = Math.min((1 - d / LINK) * 0.2 * boost, 0.5);
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
         ctx.strokeStyle = `rgba(255,255,255,${α})`;
-        ctx.lineWidth   = .5; ctx.stroke();
+        ctx.lineWidth   = a.hub || b.hub ? 1 : 0.5;
+        ctx.stroke();
       }
     }
 
     /* nodes */
     nodes.forEach(n => {
+      const α = n.hub ? 0.9 : 0.28 + Math.random() * 0.06;
       if (n.hub) {
-        const g = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,11);
-        g.addColorStop(0,'rgba(255,255,255,.28)');
-        g.addColorStop(1,'rgba(255,255,255,0)');
-        ctx.beginPath(); ctx.arc(n.x,n.y,11,0,Math.PI*2);
-        ctx.fillStyle=g; ctx.fill();
+        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22);
+        g.addColorStop(0, `rgba(255,255,255,0.22)`);
+        g.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 22, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
       }
-      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle = n.hub ? 'rgba(255,255,255,.95)' : 'rgba(255,255,255,.68)';
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${α})`;
       ctx.fill();
     });
 
     /* pulses */
     pulses = pulses.filter(p => {
-      p.p += p.sp; if (p.p >= 1) return false;
-      const x = p.a.x+(p.b.x-p.a.x)*p.p, y = p.a.y+(p.b.y-p.a.y)*p.p;
-      const g = ctx.createRadialGradient(x,y,0,x,y,9);
-      g.addColorStop(0,`rgba(${p.color},.72)`);
-      g.addColorStop(1,`rgba(${p.color},0)`);
-      ctx.beginPath(); ctx.arc(x,y,9,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
-      ctx.beginPath(); ctx.arc(x,y,2.2,0,Math.PI*2);
-      ctx.fillStyle=`rgba(${p.color},1)`; ctx.fill();
+      p.p += p.sp;
+      if (p.p >= 1) return false;
+      const x = p.a.x + (p.b.x - p.a.x) * p.p;
+      const y = p.a.y + (p.b.y - p.a.y) * p.p;
+      const c = p.color;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 10);
+      g.addColorStop(0, `rgba(${c},0.7)`);
+      g.addColorStop(1, `rgba(${c},0)`);
+      ctx.beginPath(); ctx.arc(x, y, 10, 0, Math.PI * 2);
+      ctx.fillStyle = g; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${c},1)`; ctx.fill();
       return true;
     });
 
-    if (frame % 7 === 0) spawnPulse();
+    if (frame % 6 === 0) spawnPulse();
     requestAnimationFrame(draw);
   }
 
